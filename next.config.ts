@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "Origin-Agent-Cluster", value: "?1" },
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -20,7 +20,15 @@ export default function TopicInput({ onStart, isLoading }: TopicInputProps) {
   }
 
   return (
-    <div className="flex min-h-[60vh] items-center justify-center bg-gray-950 px-4">
+    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-8 bg-gray-950 px-4">
+      <div className="text-center">
+        <h1 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
+          Steelman
+        </h1>
+        <p className="mt-2 text-sm text-gray-400">
+          Challenge a claim. Steel it — or find the contradiction.
+        </p>
+      </div>
       <form
         onSubmit={handleSubmit}
         className="flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:items-center"

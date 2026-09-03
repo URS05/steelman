@@ -1,14 +1,12 @@
 "use client";
 
-"use client";
-
-import type { CardActionHandler, CardStatus, CardType, ResearchCard } from "@/lib/types";
+import type { CardStatus, CardType, ResearchCard } from "@/lib/types";
 
 interface ClaimCardProps {
   card: ResearchCard;
-  onAccept: CardActionHandler;
-  onChallenge: CardActionHandler;
-  onDismiss: CardActionHandler;
+  onAccept: (cardId: string) => void;
+  onChallenge: (cardId: string) => void;
+  onDismiss: (cardId: string) => void;
 }
 
 const STATUS_BORDER: Record<CardStatus, string> = {
@@ -68,7 +66,8 @@ export default function ClaimCard({
 
   return (
     <article
-      className={`relative flex h-full flex-col rounded-xl border bg-gray-800 p-4 text-white transition-colors ${STATUS_BORDER[card.status]}`}
+      data-card-id={card.id}
+      className={`card relative z-10 flex h-full flex-col rounded-xl border bg-gray-800 p-4 text-white transition-colors ${STATUS_BORDER[card.status]}`}
     >
       <div className="mb-3 flex items-start justify-between gap-2">
         <span

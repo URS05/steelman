@@ -1,0 +1,12 @@
+{
+  "name": "Steelman",
+  "description": "A live collaborative research workspace. AI agents can create evidence cards, link claims, flag contradictions, and summarize research using WebMCP tools.",
+  "tools": [
+    "search_topic",
+    "create_evidence_card",
+    "link_cards",
+    "flag_contradiction",
+    "summarize_research",
+    "get_board_state"
+  ]
+}

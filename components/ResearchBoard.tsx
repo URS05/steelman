@@ -1,17 +1,15 @@
 "use client";
 
+import { useRef } from "react";
+import CardLinker from "@/components/CardLinker";
 import ClaimCard from "@/components/ClaimCard";
-import type {
-  CardActionHandler,
-  CardType,
-  ResearchSession,
-} from "@/lib/types";
+import type { CardType, ResearchSession } from "@/lib/types";
 
 interface ResearchBoardProps {
   session: ResearchSession;
-  onAccept: CardActionHandler;
-  onChallenge: CardActionHandler;
-  onDismiss: CardActionHandler;
+  onAccept: (cardId: string) => void;
+  onChallenge: (cardId: string) => void;
+  onDismiss: (cardId: string) => void;
 }
 
 const TYPE_ORDER: CardType[] = [
@@ -34,6 +32,8 @@ export default function ResearchBoard({
   onChallenge,
   onDismiss,
 }: ResearchBoardProps) {
+  const boardRef = useRef<HTMLDivElement>(null);
+
   if (session.cards.length === 0) {
     return (
       <div className="flex min-h-[40vh] items-center justify-center rounded-xl border border-dashed border-gray-700 bg-gray-950 px-6 py-16">
@@ -45,12 +45,12 @@ export default function ResearchBoard({
   }
 
   return (
-    <div className="flex flex-col gap-8 bg-gray-950">
-      {TYPE_ORDER.map((type) => {
+    <div ref={boardRef} className="relative flex flex-col gap-8 bg-gray-950">
+      <CardLinker cards={session.cards} containerRef={boardRef} />
+      {TYPE_ORDER.filter((type) =>
+        session.cards.some((card) => card.type === type),
+      ).map((type) => {
         const cards = session.cards.filter((card) => card.type === type);
-        if (cards.length === 0) {
-          return null;
-        }
 
         return (
           <section key={type} className="flex flex-col gap-3">
